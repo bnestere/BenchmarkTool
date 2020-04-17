@@ -4,8 +4,8 @@ CFLAGS=-g -O3
 CXXFLAGS=-std=c++11
 LDFLAGS=-lm 
 
-SRC_FILES=benchtool.cpp writer/csv_writer.cpp
-INTERNAL_HEADERS=writer/common.hpp
+SRC_FILES=benchtool.cpp writer/csv_writer.cpp utils/utils.cpp
+INTERNAL_HEADERS=writer/common.hpp utils/utils.hpp
 
 
 LIB_FILENAME=libbenchtool.so

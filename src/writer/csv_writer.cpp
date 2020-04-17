@@ -7,6 +7,7 @@
 #include <map>
 
 #include "../benchtool_datatypes.h"
+#include "../utils/utils.hpp"
 
 using namespace std;
 
@@ -39,21 +40,29 @@ void bench_write_vals_stream(benchctx_t *ctx, std::ostream& out,
 }
 
 const std::string _filename = "report.csv";
-const std::string _tmpfilename = "report.csv.tmp";
+const char* ENV_FILENAME = "BENCHTOOL_FILE";
 
-const std::string& bench_get_filename(benchctx_t *ctx) {
-  return _filename;
+
+void bench_get_filename(benchctx_t *ctx, string *str) {
+  str->append(string(get_env_charp_or_default(ENV_FILENAME, _filename.c_str())));
 }
 
-const std::string& bench_get_tmp_filename(benchctx_t *ctx) {
-  return _tmpfilename;
+void bench_get_tmp_filename(benchctx_t *ctx, string *str) {
+  bench_get_filename(ctx,str);
+  str->append(".tmp");
+  //str.append(bench_get_filename(ctx, str) + ".tmp";
+  //return bench_get_filename
+  //return _tmpfilename;
 }
 
 void overwrite_report(benchctx_t *ctx) {
 
   
-  const std::string filename = bench_get_filename(ctx);
-  const std::string tmpfilename = bench_get_tmp_filename(ctx);
+  std::string filename;
+  bench_get_filename(ctx, &filename);
+
+  std::string tmpfilename;
+  bench_get_tmp_filename(ctx, &tmpfilename);
 
   //std::cout << "fn " << filename << " :: tfn " << tmpfilename << "\n";
 
@@ -128,8 +137,10 @@ int record_matches_ctx(benchctx_t *ctx, std::string line, vector<int> *file2appi
 void report_csv(benchctx_t *ctx) {
   ostringstream csv;
   
-  const std::string filename = bench_get_filename(ctx);
-  const std::string tmpfilename = bench_get_tmp_filename(ctx);
+  std::string filename;
+  bench_get_filename(ctx, &filename);
+  std::string tmpfilename;
+  bench_get_tmp_filename(ctx,&tmpfilename);
 
   std::ofstream ofs(tmpfilename.c_str(), std::ofstream::out);
   std::ifstream ifs(filename.c_str());
