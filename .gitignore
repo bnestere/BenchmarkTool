@@ -1,0 +1,7 @@
+**/target
+**/*.so
+**/*.o
+**/*.mod
+**/timings.out
+**/x*
+**/report.csv*
