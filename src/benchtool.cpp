@@ -26,10 +26,7 @@ benchprop_inst_t *get_pinst(bench_ctx_t *ctx, benchprop_name_t name) {
   benchprop_name_t propname;
   int i;
   BENCHPROPS_ITERATE_AND_COUNT(ctx->props, propname, i) {
-    printf("Testing %d\n", i);
     if(propname == name) {
-      printf("Found %s\n", propname);
-
       return &ctx->pinstlist[i];
     }
   }
