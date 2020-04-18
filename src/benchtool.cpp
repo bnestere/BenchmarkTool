@@ -5,12 +5,11 @@
 
 int nProps;
 
-void init_propvals(benchctx_t *ctx) {
+void init_propvals(bench_ctx_t *ctx) {
   benchprop_name_t propname;
 
-  BENCHPROPS_ITERATE_AND_COUNT(ctx->props, propname, nProps) {
-    printf("Prop[%d]=%s\n", nProps, propname);
-  }
+  // Save the number of total properties
+  BENCHPROPS_ITERATE_AND_COUNT(ctx->props, propname, nProps); 
 
   ctx->pinstlist = (benchprop_inst_t*) malloc(sizeof(benchprop_inst_t) * nProps);
 
@@ -23,7 +22,7 @@ void init_propvals(benchctx_t *ctx) {
   }
 }
 
-benchprop_inst_t *get_pinst(benchctx_t *ctx, benchprop_name_t name) {
+benchprop_inst_t *get_pinst(bench_ctx_t *ctx, benchprop_name_t name) {
   benchprop_name_t propname;
   int i;
   BENCHPROPS_ITERATE_AND_COUNT(ctx->props, propname, i) {
@@ -38,7 +37,7 @@ benchprop_inst_t *get_pinst(benchctx_t *ctx, benchprop_name_t name) {
 }
 
 
-void bench_setval(benchctx_t *ctx, benchprop_name_t name, benchprop_val_t val) {
+void bench_setval(bench_ctx_t *ctx, benchprop_name_t name, benchprop_val_t val) {
   benchprop_inst_t *pinst = get_pinst(ctx, name);
   if(pinst == NULL) {
     printf("pinst is null\n");
@@ -48,9 +47,9 @@ void bench_setval(benchctx_t *ctx, benchprop_name_t name, benchprop_val_t val) {
   pinst->isset = 1;
 }
 
-benchctx_t *get_benchctx(benchprops_f all_props, benchprops_f unique_props) {
+bench_ctx_t *get_bench_ctx(benchprops_f all_props, benchprops_f unique_props) {
   //benchprops_t bp = f();
-  static benchctx_t ctx;
+  static bench_ctx_t ctx;
   ctx.props = all_props();
   ctx.unique_keys = unique_props();
 
@@ -61,6 +60,6 @@ benchctx_t *get_benchctx(benchprops_f all_props, benchprops_f unique_props) {
 }
 
 
-void bench_report(benchctx_t *ctx) {
+void bench_report(bench_ctx_t *ctx) {
   report_csv(ctx);
 }

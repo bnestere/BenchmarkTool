@@ -19,11 +19,11 @@ typedef struct _benchprop_inst_t {
 } benchprop_inst_t;
 
 
-typedef struct _benchctx_t {
+typedef struct _bench_ctx_t {
   benchprops_t props; // all property names supported by a benchmark
   benchprops_t unique_keys; //  list of property names with values that uniquely identify a record
   benchprop_inst_t *pinstlist; // instantiation list of all properties
-} benchctx_t;
+} bench_ctx_t;
 
 #define BP_DECL(x) BP_VAR(x)
 #define ITER_VAR   BP_DECL(__LINE__)

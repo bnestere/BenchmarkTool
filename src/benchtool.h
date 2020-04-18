@@ -20,14 +20,14 @@
  *     will be reported on for this benchmark
  *      
  */
-EXTC benchctx_t *get_benchctx(benchprops_f all_props, benchprops_f unique_props);
+EXTC bench_ctx_t *get_bench_ctx(benchprops_f all_props, benchprops_f unique_props);
 
-EXTC void bench_setval(benchctx_t *ctx, benchprop_name_t name, benchprop_val_t val);
+EXTC void bench_setval(bench_ctx_t *ctx, benchprop_name_t name, benchprop_val_t val);
 
 /*
  * write the report of the benchmark results
  */
-EXTC void bench_report(benchctx_t *ctx);
+EXTC void bench_report(bench_ctx_t *ctx);
 
 
 #undef EXTC

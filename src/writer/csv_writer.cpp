@@ -11,7 +11,7 @@
 
 using namespace std;
 
-void bench_write_line_csv_stream(benchctx_t *ctx, std::ostream& out) {
+void bench_write_line_csv_stream(bench_ctx_t *ctx, std::ostream& out) {
   benchprops_t props = ctx->props; 
   int i;
   const char *nameiter;
@@ -22,7 +22,7 @@ void bench_write_line_csv_stream(benchctx_t *ctx, std::ostream& out) {
   out << "\n";
 }
 
-void bench_write_vals_stream(benchctx_t *ctx, std::ostream& out,
+void bench_write_vals_stream(bench_ctx_t *ctx, std::ostream& out,
     std::vector<int> *file2appidx) {
   
 
@@ -43,11 +43,11 @@ const std::string _filename = "report.csv";
 const char* ENV_FILENAME = "BENCHTOOL_FILE";
 
 
-void bench_get_filename(benchctx_t *ctx, string *str) {
+void bench_get_filename(bench_ctx_t *ctx, string *str) {
   str->append(string(get_env_charp_or_default(ENV_FILENAME, _filename.c_str())));
 }
 
-void bench_get_tmp_filename(benchctx_t *ctx, string *str) {
+void bench_get_tmp_filename(bench_ctx_t *ctx, string *str) {
   bench_get_filename(ctx,str);
   str->append(".tmp");
   //str.append(bench_get_filename(ctx, str) + ".tmp";
@@ -55,7 +55,7 @@ void bench_get_tmp_filename(benchctx_t *ctx, string *str) {
   //return _tmpfilename;
 }
 
-void overwrite_report(benchctx_t *ctx) {
+void overwrite_report(bench_ctx_t *ctx) {
 
   
   std::string filename;
@@ -74,7 +74,7 @@ void overwrite_report(benchctx_t *ctx) {
 
 
 
-void process_first_line(benchctx_t *ctx, std::string propname_line, vector<int> *file2appidx) {
+void process_first_line(bench_ctx_t *ctx, std::string propname_line, vector<int> *file2appidx) {
   std::istringstream propstream(propname_line);
 
   while(propstream) {
@@ -92,7 +92,7 @@ void process_first_line(benchctx_t *ctx, std::string propname_line, vector<int> 
   }
 }
 
-int record_matches_ctx(benchctx_t *ctx, std::string line, vector<int> *file2appidx) {
+int record_matches_ctx(bench_ctx_t *ctx, std::string line, vector<int> *file2appidx) {
 
   std::istringstream valstream(line);
 
@@ -134,7 +134,7 @@ int record_matches_ctx(benchctx_t *ctx, std::string line, vector<int> *file2appi
   return matchingValues == nUniques;
 }
 
-void report_csv(benchctx_t *ctx) {
+void report_csv(bench_ctx_t *ctx) {
   ostringstream csv;
   
   std::string filename;
