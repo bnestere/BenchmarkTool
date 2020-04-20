@@ -20,7 +20,6 @@ benchprops_t unique_props_f() {
 
 int main(int argc, char *argv[]) {
   bench_ctx_t *ctx = get_bench_ctx(all_props_f, unique_props_f);
-  //bench_setval(ctx, "ymax", 73);
   bench_setval(ctx, "ukey1", 15);
   bench_setval(ctx, "ukey2", 22);
   bench_setval(ctx, "ukey3", 38);
