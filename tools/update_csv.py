@@ -32,4 +32,4 @@ with open(data_filename, 'r') as data_file, open(translation_filename, 'r') as t
                     bench_entry[trans_key] = translation['to']
         writer.writerow(bench_entry)
         translation_file.seek(0)
-shutil.move(tempfile.name, data_filename)
+shutil.move(tempfile.name, data_filename+'.translated')

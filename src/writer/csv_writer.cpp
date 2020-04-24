@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <limits>
+#include <iomanip>
 
 #include "../benchtool_datatypes.h"
 #include "../utils/utils.hpp"
@@ -24,18 +26,14 @@ void bench_write_line_csv_stream(bench_ctx_t *ctx, std::ostream& out) {
 
 void bench_write_vals_stream(bench_ctx_t *ctx, std::ostream& out,
     std::vector<int> *file2appidx) {
-  
-
-  //std::vector<int>::iterator it = file2appidx->begin();
-
   int filei = 0;
   for(int appi : *file2appidx) {
     if(filei > 0) out << ",";
-    if(ctx->pinstlist[appi].isset) out << ctx->pinstlist[appi].val;
+    if(ctx->pinstlist[appi].isset) out << std::setprecision(4) << ctx->pinstlist[appi].val;
     filei++;
   }
 
-  out << "\n";
+  out << std::endl;
 
 }
 
