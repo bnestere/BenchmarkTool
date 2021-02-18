@@ -45,7 +45,6 @@ void bench_setval(bench_ctx_t *ctx, benchprop_name_t name, benchprop_val_t val) 
 }
 
 bench_ctx_t *get_bench_ctx(benchprops_f all_props, benchprops_f unique_props) {
-  //benchprops_t bp = f();
   static bench_ctx_t ctx;
   ctx.props = all_props();
   ctx.unique_keys = unique_props();
