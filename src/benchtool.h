@@ -16,16 +16,27 @@
  * function pointer parameter
  * 
  * Arguments
- *  f: The specification function to determine which properties
- *     will be reported on for this benchmark
+ *  all_props: All properties to save for the particular benchmark
+ *  unique_props: Properties that uniquely identify a run
  *      
  */
 EXTC bench_ctx_t *get_bench_ctx(benchprops_f all_props, benchprops_f unique_props);
 
+/*
+ * Set a value for a given benchmark run
+ *
+ * Arguments
+ *  ctx: The benchmark context to save the value in
+ *  name: The name of the property to set a value for
+ *  val: The value of the property
+ */
 EXTC void bench_setval(bench_ctx_t *ctx, benchprop_name_t name, benchprop_val_t val);
 
 /*
- * write the report of the benchmark results
+ * Write the report of the benchmark results
+ *
+ * Arguments
+ *  ctx: The benchmark context to write all property names/values for
  */
 EXTC void bench_report(bench_ctx_t *ctx);
 
